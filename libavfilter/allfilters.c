@@ -477,6 +477,7 @@ extern AVFilter ff_avf_showspectrum;
 extern AVFilter ff_avf_showspectrumpic;
 extern AVFilter ff_avf_showvolume;
 extern AVFilter ff_avf_showwaves;
+extern AVFilter ff_avf_extshowwaves;
 extern AVFilter ff_avf_showwavespic;
 extern AVFilter ff_vaf_spectrumsynth;
 
