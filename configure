@@ -295,6 +295,8 @@ External library support:
                            native MPEG-4/Xvid encoder exists [no]
   --enable-libxml2         enable XML parsing using the C library libxml2, needed
                            for dash demuxing support [no]
+  --enable-libagg          enable avfilter using the C++ library libagg, needed
+                           for stylewave filter support [no]
   --enable-libzimg         enable z.lib, needed for zscale filter [no]
   --enable-libzmq          enable message passing via libzmq [no]
   --enable-libzvbi         enable teletext support via libzvbi [no]
@@ -1820,6 +1822,7 @@ EXTERNAL_LIBRARY_LIST="
     opengl
     pocketsphinx
     vapoursynth
+    libagg
 "
 
 HWACCEL_AUTODETECT_LIBRARY_LIST="
@@ -3613,7 +3616,7 @@ vpp_qsv_filter_select="qsvvpp"
 xfade_opencl_filter_deps="opencl"
 yadif_cuda_filter_deps="ffnvcodec"
 yadif_cuda_filter_deps_any="cuda_nvcc cuda_llvm"
-
+stylewaves_filter_deps="libagg"
 # examples
 avio_list_dir_deps="avformat avutil"
 avio_reading_deps="avformat avcodec avutil"
@@ -6572,6 +6575,10 @@ if enabled libxcb; then
     enabled libxcb_shape  && check_pkg_config libxcb_shape  xcb-shape  xcb/shape.h  xcb_shape_get_rectangles
     enabled libxcb_xfixes && check_pkg_config libxcb_xfixes xcb-xfixes xcb/xfixes.h xcb_xfixes_get_cursor_image
 fi
+
+enabled libagg &&
+    require_cpp libagg agg2/agg_basics.h "agg::rect_d*"
+
 
 check_func_headers "windows.h" CreateDIBSection "$gdigrab_indev_extralibs"
 

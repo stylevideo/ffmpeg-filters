@@ -502,6 +502,8 @@ OBJS-$(CONFIG_SHOWWAVES_FILTER)              += avf_showwaves.o
 OBJS-$(CONFIG_SHOWWAVESPIC_FILTER)           += avf_showwaves.o
 OBJS-$(CONFIG_EXTSHOWWAVES_FILTER)              += avf_extshowwaves.o
 OBJS-$(CONFIG_EXTSHOWWAVESPIC_FILTER)           += avf_extshowwaves.o
+OBJS-$(CONFIG_STYLEWAVES_FILTER)              += avf_stylewaves.o agg_draw_impl.o
+OBJS-$(CONFIG_STYLEWAVESPIC_FILTER)           += avf_stylewaves.o
 OBJS-$(CONFIG_SPECTRUMSYNTH_FILTER)          += vaf_spectrumsynth.o
 
 # multimedia sources

@@ -419,34 +419,6 @@ static void draw_sample_cline_gray(uint8_t *buf, int height, int linesize,
         buf[k * linesize] += color[0];
 }
 
-
-
-static void draw_line(AVFrame *out, int x0, int y0, int x1, int y1, uint32_t color)
-{
-    int dx = FFABS(x1-x0);
-    int dy = FFABS(y1-y0), sy = y0 < y1 ? 1 : -1;
-    int err = (dx>dy ? dx : -dy) / 2, e2;
-
-    for (;;) {
-        AV_WL32(out->data[0] + y0 * out->linesize[0] + x0 * 4, color);
-
-        if (x0 == x1 && y0 == y1)
-            break;
-
-        e2 = err;
-
-        if (e2 >-dx) {
-            err -= dy;
-            x0--;
-        }
-
-        if (e2 < dy) {
-            err += dx;
-            y0 += sy;
-        }
-    }
-}
-
 static int config_output(AVFilterLink *outlink)
 {
     AVFilterContext *ctx = outlink->src;
@@ -703,7 +675,7 @@ static av_cold int init(AVFilterContext *ctx)
 {
     ExtShowWavesContext *showwaves = ctx->priv;
 
-    if (!strcmp(ctx->filter->name, "showwavespic")) {
+    if (!strcmp(ctx->filter->name, "extshowwavespic")) {
         showwaves->single_pic = 1;
         showwaves->mode = MODE_CENTERED_LINE;
     }
@@ -900,7 +872,7 @@ static const AVFilterPad showwavespic_outputs[] = {
 };
 
 AVFilter ff_avf_extshowwavespic = {
-    .name          = "showwavespic",
+    .name          = "extshowwavespic",
     .description   = NULL_IF_CONFIG_SMALL("Convert input audio to a video output single picture."),
     .init          = init,
     .uninit        = uninit,

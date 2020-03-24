@@ -1,5 +1,6 @@
 MAIN_MAKEFILE=1
 include ffbuild/config.mak
+LDFLAGS += -lstdc++
 
 vpath %.c    $(SRC_PATH)
 vpath %.cpp  $(SRC_PATH)

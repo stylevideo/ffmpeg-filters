@@ -646,6 +646,16 @@ struct AVFilterLink {
 
 };
 
+typedef struct buffer_conext_t
+{
+    uint8_t * pixels;
+    int width;                      ///< agreed upon image width
+    int height;                      ///< agreed upon image height
+    int linesize;
+    int pixstep;
+} buffer_conext;
+
+
 /**
  * Link two filters together.
  *
